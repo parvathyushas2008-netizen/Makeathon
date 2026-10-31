@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SubManager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="auth-body">
+
+<div class="auth-layout">
+
+    <!-- LEFT ILLUSTRATION PANEL -->
+    <section class="auth-visual">
+
+        <h1>👑 SubManager</h1>
+
+        <div class="auth-illustration">
+            🌟 💻
+        </div>
+
+        <h1>Welcome Back!</h1>
+
+        <p>
+            Your subscriptions, plans and account
+            are all waiting for you.
+        </p>
+
+        <p style="margin-top:40px;">
+            Manage • Subscribe • Grow 💜
+        </p>
+
+    </section>
+
+
+    <!-- LOGIN FORM -->
+    <section class="auth-form-panel">
+
+        <div class="auth-card">
+
+            <h2>Welcome Back!</h2>
+
+            <p class="auth-description">
+                Login to continue to your account.
+            </p>
+
+            <form action="/login" method="POST">
+
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="submit">Login to Account →</button>
+
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    Don't have an account?
+                    <a href="/">Create Account</a>
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>

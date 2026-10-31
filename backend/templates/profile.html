@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SubManager Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h2>👑 SubManager</h2>
+        <p class="brand-subtitle">Subscription Management System</p>
+
+        <hr>
+
+        <p class="menu-heading">MAIN MENU</p>
+
+        <a href="/profile" class="active">🏠 Dashboard</a>
+        <a href="/edit-profile">👤 My Profile</a>
+
+        {% if user_role == "Admin" %}
+
+            <hr>
+            <p class="menu-heading">ADMIN MENU</p>
+
+            <a href="#users">👥 User Management</a>
+            <a href="#products">📦 Product Management</a>
+            <a href="#plans">💎 Plan Management</a>
+            <a href="#subscriptions">🔄 Subscriptions</a>
+            <a href="#reports">📊 Billing & Reports</a>
+
+        {% elif user_role == "Staff" %}
+
+            <hr>
+            <p class="menu-heading">STAFF MENU</p>
+
+            <a href="#customers">👥 Customer Records</a>
+            <a href="#subscriptions">🔄 Subscriptions</a>
+
+        {% else %}
+
+            <hr>
+            <p class="menu-heading">CUSTOMER MENU</p>
+
+            <a href="#subscriptions">💳 My Subscriptions</a>
+            <a href="#plans">💎 Available Plans</a>
+            <a href="#payments">🧾 Payment History</a>
+
+        {% endif %}
+
+        <hr>
+
+        <p class="menu-heading">ACCOUNT</p>
+
+        <a href="/edit-profile">⚙️ Edit Profile</a>
+        <a href="/logout">🚪 Logout</a>
+
+        <p style="color:#b8c9ed; text-align:center; margin-top:35px;">
+            Manage • Subscribe • Grow 💜
+        </p>
+
+    </aside>
+
+
+    <!-- MAIN DASHBOARD -->
+    <main class="dashboard-main">
+
+        <div class="dashboard-topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p class="dashboard-subtitle">
+                    Welcome to your subscription management space!
+                </p>
+            </div>
+
+            <div style="font-size:30px;">
+                🔔 👤
+            </div>
+        </div>
+
+
+        <!-- WELCOME BANNER -->
+        <section class="welcome-banner">
+
+            <h2>Hello, {{ user_name }}! 👋</h2>
+
+            <p style="font-size:17px;">
+                Welcome back! Here's your dashboard overview.
+            </p>
+
+            <p style="margin-top:15px;">
+                👑 {{ user_role }} Account
+                &nbsp; • &nbsp;
+                🟢 Active Account
+            </p>
+
+            <div style="font-size:55px; text-align:right;">
+                💻 ✨
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD CARDS -->
+        <div class="dashboard-cards">
+
+            {% if user_role == "Admin" %}
+
+                <div class="dash-card card-blue" id="users">
+                    <div class="card-icon">👥</div>
+                    <h3>User Management</h3>
+                    <p>Manage system users and their roles.</p>
+                </div>
+
+                <div class="dash-card card-purple" id="products">
+                    <div class="card-icon">📦</div>
+                    <h3>Products</h3>
+                    <p>Organize and manage products.</p>
+                </div>
+
+                <div class="dash-card card-green" id="plans">
+                    <div class="card-icon">💎</div>
+                    <h3>Subscription Plans</h3>
+                    <p>Manage available subscription plans.</p>
+                </div>
+
+                <div class="dash-card card-orange" id="subscriptions">
+                    <div class="card-icon">🔄</div>
+                    <h3>Subscriptions</h3>
+                    <p>Monitor customer subscriptions.</p>
+                </div>
+
+            {% elif user_role == "Staff" %}
+
+                <div class="dash-card card-blue" id="customers">
+                    <div class="card-icon">👥</div>
+                    <h3>Customer Records</h3>
+                    <p>View and manage customer information.</p>
+                </div>
+
+                <div class="dash-card card-purple" id="subscriptions">
+                    <div class="card-icon">🔄</div>
+                    <h3>Subscriptions</h3>
+                    <p>Handle assigned subscription tasks.</p>
+                </div>
+
+            {% else %}
+
+                <div class="dash-card card-blue" id="subscriptions">
+                    <div class="card-icon">💳</div>
+                    <h3>My Subscriptions</h3>
+                    <p>View and manage your subscriptions.</p>
+                </div>
+
+                <div class="dash-card card-purple" id="plans">
+                    <div class="card-icon">💎</div>
+                    <h3>Available Plans</h3>
+                    <p>Explore subscription plans.</p>
+                </div>
+
+                <div class="dash-card card-green" id="payments">
+                    <div class="card-icon">🧾</div>
+                    <h3>Payment History</h3>
+                    <p>Keep track of your payments.</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ACCOUNT OVERVIEW -->
+        <section class="dashboard-panel">
+
+            <h2>📊 Account Overview</h2>
+
+            <p><strong>Name:</strong> {{ user_name }}</p>
+
+            <p><strong>Account Role:</strong> {{ user_role }}</p>
+
+            <p><strong>Account Status:</strong>
+                <span style="color:#16a67a;">● Active</span>
+            </p>
+
+            <a href="/edit-profile">
+                <button type="button">✏️ Edit My Profile</button>
+            </a>
+
+        </section>
+
+
+        <!-- BOTTOM MESSAGE -->
+        <section class="dashboard-panel"
+                 style="background:linear-gradient(120deg,#e8e7ff,#dceaff);">
+
+            <h2>✨ Stay Subscribed, Stay Ahead!</h2>
+
+            <p>
+                Manage your plans, keep track of subscriptions
+                and enjoy a better experience with SubManager.
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
