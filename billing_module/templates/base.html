@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brightloop - Billing System</title>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Brightloop</h2>
+        <p>Management System</p>
+
+        <a href="{{ url_for('billing') }}">Billing</a>
+        <a href="{{ url_for('payments') }}">Payments</a>
+        <a href="{{ url_for('reports') }}">Reports</a>
+    </div>
+
+    <div class="main">
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>

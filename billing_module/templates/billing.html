@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Billing & Invoices</h1>
+<p>Manage customer invoices</p>
+
+<div class="card">
+    <h2>Create New Invoice</h2>
+
+    <form action="{{ url_for('add_invoice') }}" method="POST">
+
+        <input type="text" name="customer_name"
+        placeholder="Customer Name" required>
+
+        <input type="text" name="subscription_id"
+        placeholder="Subscription ID">
+
+        <label>Invoice Date</label>
+        <input type="date" name="invoice_date" required>
+
+        <label>Due Date</label>
+        <input type="date" name="due_date" required>
+
+        <input type="number" step="0.01"
+        name="subtotal" placeholder="Subtotal" min="0.01" required>
+
+        <input type="number" step="0.01"
+        name="tax" placeholder="Tax Amount" min="0" value="0" required>
+
+        <input type="number" step="0.01"
+        name="discount" placeholder="Discount" min="0" value="0" required>
+
+        <button type="submit">Generate Invoice</button>
+
+    </form>
+</div>
+
+<div class="card">
+<h2>Invoice List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Invoice No.</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Paid</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.invoice_number }}</td>
+            <td>{{ invoice.customer_name }}</td>
+            <td>{{ invoice.invoice_date }}</td>
+            <td>₹{{ "%.2f"|format(invoice.total_amount) }}</td>
+            <td>₹{{ "%.2f"|format(invoice.paid_amount) }}</td>
+            <td>{{ invoice.status }}</td>
+
+            <td>
+                {% if invoice.status == "Draft" %}
+                <form action="{{ url_for('confirm_invoice', id=invoice.id) }}"
+                      method="POST">
+                    <button type="submit">Confirm</button>
+                </form>
+                {% endif %}
+
+                {% if invoice.status in ["Draft", "Confirmed"] %}
+                <form action="{{ url_for('cancel_invoice', id=invoice.id) }}"
+                      method="POST">
+                    <button type="submit">Cancel</button>
+                </form>
+                {% endif %}
+
+                <a href="{{ url_for('print_invoice', id=invoice.id) }}"
+                   target="_blank">Print</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

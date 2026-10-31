@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Financial Reports</h1>
+<p>Overview of billing and payment performance</p>
+
+<div class="stats">
+
+    <div class="stat-card">
+        <h3>Total Revenue</h3>
+        <h2>₹{{ "%.2f"|format(total_revenue) }}</h2>
+        <p>Payments received</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Outstanding Amount</h3>
+        <h2>₹{{ "%.2f"|format(outstanding) }}</h2>
+        <p>Amount yet to be paid</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Total Invoices</h3>
+        <h2>{{ total_invoices }}</h2>
+        <p>Invoices generated</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Active Subscriptions</h3>
+        <h2>{{ active_subscriptions }}</h2>
+        <p>Distinct subscription IDs in invoices</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Overdue Invoices</h3>
+        <h2>{{ overdue }}</h2>
+        <p>Confirmed invoices past due date</p>
+    </div>
+
+</div>
+
+<div class="card">
+    <h2>Report Summary</h2>
+
+    <table>
+        <tr>
+            <th>Report</th>
+            <th>Value</th>
+        </tr>
+
+        <tr>
+            <td>Total Revenue Received</td>
+            <td>₹{{ "%.2f"|format(total_revenue) }}</td>
+        </tr>
+
+        <tr>
+            <td>Outstanding Amount</td>
+            <td>₹{{ "%.2f"|format(outstanding) }}</td>
+        </tr>
+
+        <tr>
+            <td>Total Invoices</td>
+            <td>{{ total_invoices }}</td>
+        </tr>
+
+        <tr>
+            <td>Overdue Invoices</td>
+            <td>{{ overdue }}</td>
+        </tr>
+
+    </table>
+</div>
+
+{% endblock %}
