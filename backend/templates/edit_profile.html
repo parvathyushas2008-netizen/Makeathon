@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Subscription Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Subscription Manager</h1>
+
+        <h2 style="text-align:center; margin-top:25px;">
+            Edit Your Profile
+        </h2>
+
+        <p style="text-align:center;">
+            Update your account information below.
+        </p>
+
+        <form action="/update-profile" method="POST">
+
+            <label for="name">Full Name</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                value="{{ user_name }}"
+                placeholder="Enter your full name"
+                required
+            >
+
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                value="{{ user_email }}"
+                placeholder="Enter your email"
+                required
+            >
+
+            <button type="submit">Save Changes</button>
+
+        </form>
+
+        <p style="text-align:center; margin-top:20px;">
+            <a href="/profile">← Back to Dashboard</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
